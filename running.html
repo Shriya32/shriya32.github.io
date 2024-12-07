@@ -7,6 +7,7 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💾</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
+        /* Your existing styles */
         body {
             font-family: 'Merriweather', Georgia, serif;
             line-height: 1.7;
@@ -51,10 +52,11 @@
             padding: 0.5rem 0;
             border-top: 1px solid #ddd;
             border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
         }
         
         .nav-lines a {
-            margin-right: 2rem;
             color: #333;
             text-decoration: none;
             font-size: 0.9rem;
@@ -84,6 +86,23 @@
             color: #666;
             border-top: 1px solid #ddd;
             padding-top: 1rem;
+        }
+
+        /* New styles for Strava embed */
+        .strava-embed {
+            margin-top: 1rem;
+            width: 100%;
+        }
+
+        .strava-embed iframe {
+            width: 100%;
+            border: none;
+        }
+
+        @media (max-width: 600px) {
+            .nav-lines a {
+                font-size: 0.85rem;
+            }
         }
     </style>
     <script>
@@ -122,7 +141,19 @@
 
     <div class="content">
         <h2>Running</h2>
-        <p>Running logs and routes coming soon.</p>
+        <p>Latest running activties via strava.</p>
+        
+        <div class="strava-embed">
+            <!-- Replace ATHLETE_ID with your actual Strava athlete ID -->
+            <iframe 
+                height="454" 
+                width="100%" 
+                frameborder='0' 
+                allowtransparency='true' 
+                scrolling='no' 
+                src='https://www.strava.com/athletes/20596260/activity-summary/7b68b818af10ce7893eb0c64073a9d491f945384'>
+            </iframe>
+        </div>
     </div>
 
     <div class="footer">
