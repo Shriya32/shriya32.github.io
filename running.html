@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Running - Shriya's Archive</title>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            line-height: 1.7;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 2rem;
+            color: #2c3e50;
+            background-color: #f4f4f4;
+            font-size: 16px;
+        }
+        
+        h1, h2, h3 {
+            font-family: 'Libre Baskerville', Georgia, serif;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        h2 {
+            font-size: 1.2rem;
+            margin-top: 1.5rem;
+            font-weight: 600;
+        }
+
+        .time-display {
+            font-size: 0.8rem;
+            color: #666;
+            text-align: left;
+            font-family: 'Merriweather', Georgia, serif;
+            margin: 0.5rem 0;
+            font-style: italic;
+        }
+
+        .nav-lines {
+            text-align: left;
+            margin: 1.5rem 0;
+            padding: 0.5rem 0;
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .nav-lines a {
+            margin-right: 2rem;
+            color: #333;
+            text-decoration: none;
+            font-size: 0.9rem;
+            position: relative;
+        }
+        
+        .nav-lines a:hover:after {
+            content: "";
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: #333;
+        }
+
+        .content {
+            background-color: white;
+            padding: 1.25rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .footer {
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #666;
+            border-top: 1px solid #ddd;
+            padding-top: 1rem;
+        }
+    </style>
+    <script>
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleString('en-US', {
+                timeZone: 'GMT',
+                hour12: false,
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            }) + ' GMT';
+            document.getElementById('current-time').textContent = timeString;
+        }
+
+        setInterval(updateTime, 1000);
+    </script>
+</head>
+<body onload="updateTime()">
+    <h1>Shriya's Archive</h1>
+    <div class="time-display">
+        <span id="current-time"></span>
+    </div>
+
+    <div class="nav-lines">
+        <a href="/">home</a>
+        <a href="/blog">blog</a>
+        <a href="/running">running</a>
+        <a href="/concerts">concerts</a>
+        <a href="/mixtapes">mixtapes</a>
+    </div>
+
+    <div class="content">
+        <h2>Running</h2>
+        <p>Running logs and routes coming soon.</p>
+    </div>
+
+    <div class="footer">
+        <p>Contact: <a href="mailto:your.email@example.com">your.email@example.com</a></p>
+    </div>
+</body>
+</html>
