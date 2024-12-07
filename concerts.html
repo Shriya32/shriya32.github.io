@@ -44,8 +44,7 @@
             margin: 0.5rem 0;
             font-style: italic;
         }
-
-        .nav-lines {
+         .nav-lines {
             text-align: left;
             margin: 1.5rem 0;
             padding: 0.5rem 0;
@@ -61,14 +60,28 @@
             position: relative;
         }
         
-        .nav-lines a:hover:after {
-            content: "";
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            background: #333;
+        .nav-lines {
+            text-align: left;
+            margin: 1.5rem 0;
+            padding: 0.5rem 0;
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between; /* This will space items evenly */
+        }
+
+        .nav-lines a {
+            color: #333;
+            text-decoration: none;
+            font-size: 0.9rem;
+            position: relative;
+            margin-right: 0; /* Remove the margin-right */
+        }
+        
+        @media (max-width: 600px) {
+            .nav-lines a {
+                font-size: 0.85rem;
+            }
         }
 
         .content {
@@ -84,6 +97,15 @@
             color: #666;
             border-top: 1px solid #ddd;
             padding-top: 1rem;
+            margin: 0 50px;
+        }
+
+        ul {
+            padding-left: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.75rem;
         }
     </style>
     <script>
