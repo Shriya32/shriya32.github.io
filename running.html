@@ -45,7 +45,22 @@
             margin: 0.5rem 0;
             font-style: italic;
         }
-
+ .nav-lines {
+            text-align: left;
+            margin: 1.5rem 0;
+            padding: 0.5rem 0;
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .nav-lines a {
+            margin-right: 2rem;
+            color: #333;
+            text-decoration: none;
+            font-size: 0.9rem;
+            position: relative;
+        }
+        
         .nav-lines {
             text-align: left;
             margin: 1.5rem 0;
@@ -53,24 +68,21 @@
             border-top: 1px solid #ddd;
             border-bottom: 1px solid #ddd;
             display: flex;
-            justify-content: space-between;
+            justify-content: space-between; /* This will space items evenly */
         }
-        
+
         .nav-lines a {
             color: #333;
             text-decoration: none;
             font-size: 0.9rem;
             position: relative;
+            margin-right: 0; /* Remove the margin-right */
         }
         
-        .nav-lines a:hover:after {
-            content: "";
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            background: #333;
+        @media (max-width: 600px) {
+            .nav-lines a {
+                font-size: 0.85rem;
+            }
         }
 
         .content {
@@ -86,6 +98,15 @@
             color: #666;
             border-top: 1px solid #ddd;
             padding-top: 1rem;
+            margin: 0 50px;
+        }
+
+        ul {
+            padding-left: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.75rem;
         }
 
         /* New styles for Strava embed */
@@ -143,7 +164,7 @@
         <h2>Running</h2>
         <p>Latest running activties via strava.</p>
         
-       <iframe height='454' width='300' frameborder='0' allowtransparency='true' scrolling='yes' src='https://www.strava.com/athletes/20596260/latest-rides/d9697f50dfdefefd1f8a7eb3bc4538468afe0107'></iframe>
+       <iframe height='600' width='400' frameborder='2' allowtransparency='true' scrolling='yes' src='https://www.strava.com/athletes/20596260/latest-rides/d9697f50dfdefefd1f8a7eb3bc4538468afe0107'></iframe>
 
     <div class="footer">
         <p>Contact: <a href="mailto:your.email@example.com">your.email@example.com</a></p>
