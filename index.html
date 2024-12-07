@@ -68,36 +68,22 @@
             border-top: 1px solid #ddd;
             border-bottom: 1px solid #ddd;
             display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem 1rem;
+            justify-content: space-between; /* This will space items evenly */
         }
-        
+
         .nav-lines a {
             color: #333;
             text-decoration: none;
             font-size: 0.9rem;
             position: relative;
-            padding: 0.2rem 0;
+            margin-right: 0; /* Remove the margin-right */
         }
-
-        /* Mobile-specific adjustments */
-            @media (max-width: 600px) {
-                body {
-                    padding: 0.75rem;
-                }
-            
-                .nav-lines {
-                    padding: 0.75rem 0;
-                }
-            
-                .nav-lines a {
-                    font-size: 0.85rem;
-                }
-            
-                .content {
-                    padding: 1rem;
-                }
+        
+        @media (max-width: 600px) {
+            .nav-lines a {
+                font-size: 0.85rem;
             }
+        }
 
         .content {
             background-color: white;
