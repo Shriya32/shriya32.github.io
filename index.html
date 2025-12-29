@@ -15,7 +15,7 @@
 
         body {
             font-family: 'Inter', -apple-system, sans-serif;
-            background: #F5F4F1;
+            background: #EBE9E6;
             color: #000;
             line-height: 1.6;
             padding: 2rem;
@@ -38,7 +38,7 @@
         .time-display {
             font-family: 'Space Mono', monospace;
             font-size: 0.75rem;
-            color: #666;
+            color: #636362;
         }
 
         nav {
@@ -57,57 +57,101 @@
         }
 
         nav a:hover {
-            color: #1e40af;
+            color: #3654B7;
         }
 
-        /* Paper with texture and 3D effect */
+        /* Paper with subtle crumpled texture */
         .paper {
-            background: #fafafa;
+            background: #F7F7F7;
             padding: 3rem;
             position: relative;
-            border-radius: 2px;
             box-shadow: 
                 0 1px 2px rgba(0,0,0,0.07),
                 0 2px 4px rgba(0,0,0,0.07),
                 0 4px 8px rgba(0,0,0,0.07),
                 0 8px 16px rgba(0,0,0,0.07),
                 0 16px 32px rgba(0,0,0,0.07);
-            background-image: 
-                repeating-linear-gradient(
-                    0deg,
-                    transparent,
-                    transparent 2px,
-                    rgba(0,0,0,0.01) 2px,
-                    rgba(0,0,0,0.01) 4px
-                );
         }
 
+        /* Subtle crumpled paper texture overlay */
         .paper::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(0,0,0,0.05) 20%,
-                rgba(0,0,0,0.05) 80%,
-                transparent
-            );
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(0,0,0,0.02) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0,0,0,0.015) 0%, transparent 50%),
+                radial-gradient(circle at 40% 70%, rgba(0,0,0,0.02) 0%, transparent 50%),
+                radial-gradient(circle at 70% 60%, rgba(0,0,0,0.015) 0%, transparent 50%),
+                radial-gradient(circle at 10% 80%, rgba(0,0,0,0.02) 0%, transparent 50%),
+                radial-gradient(circle at 90% 85%, rgba(0,0,0,0.015) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        /* Very subtle paper grain */
+        .paper::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            opacity: 0.5;
         }
 
         .content {
             display: grid;
             gap: 2.5rem;
+            position: relative;
+            z-index: 1;
         }
 
         section {
-            padding-bottom: 1.5rem;
+            padding-bottom: 2rem;
+            position: relative;
         }
 
         section:not(:last-child) {
-            border-bottom: 1px solid rgba(0,0,0,0.08);
+            border-bottom: none;
+        }
+
+        /* Fold line as section divider */
+        section:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: -3rem;
+            right: -3rem;
+            height: 1px;
+            background: linear-gradient(
+                90deg,
+                transparent 0%,
+                rgba(0,0,0,0.08) 2%,
+                rgba(0,0,0,0.12) 50%,
+                rgba(0,0,0,0.08) 98%,
+                transparent 100%
+            );
+            box-shadow: 0 1px 1px rgba(255,255,255,0.6);
+        }
+
+        /* Intro section styling */
+        .intro-section {
+            padding-bottom: 2rem;
+        }
+
+        .intro-line {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            color: #636362;
+            font-weight: 400;
+            font-style: italic;
+            margin-bottom: 0;
+            line-height: 1.6;
         }
 
         h2 {
@@ -140,7 +184,7 @@
 
         .update-label {
             font-weight: 600;
-            color: #666;
+            color: #636362;
             font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 0.08em;
@@ -173,16 +217,16 @@
         }
 
         .footer-links a:hover {
-            color: #1e40af;
+            color: #3654B7;
         }
 
         .copyright {
-            color: #999;
+            color: #636362;
             font-size: 0.8rem;
         }
 
         .highlight {
-            color: #1e40af;
+            color: #3654B7;
             text-decoration: none;
         }
 
@@ -208,6 +252,10 @@
                 gap: 1rem;
             }
 
+            .intro-line {
+                font-size: 0.85rem;
+            }
+
             footer {
                 flex-direction: column;
                 gap: 1rem;
@@ -217,6 +265,11 @@
             .updates li {
                 grid-template-columns: 1fr;
                 gap: 0.25rem;
+            }
+
+            section:not(:last-child)::after {
+                left: -2rem;
+                right: -2rem;
             }
         }
     </style>
@@ -235,8 +288,8 @@
 
     <div class="paper">
         <div class="content">
-            <section>
-                <p>Hi, I'm Shriya. Welcome to my personal corner of the internet.</p>
+            <section class="intro-section">
+                <p class="intro-line">Hi, I'm Shriya. Welcome to my personal corner of the internet.</p>
             </section>
 
             <section>
