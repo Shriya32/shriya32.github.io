@@ -408,54 +408,64 @@
         }
 
         @media (max-width: 600px) {
-            body {
-                padding: 1rem;
-            }
+    body {
+        padding: 1rem;
+    }
 
-            .paper {
-                padding: 2rem 1.5rem;
-            }
+    .paper {
+        padding: 2rem 1.5rem;
+    }
 
-            h1 {
-                font-size: 1.5rem;
-            }
+    h1 {
+        font-size: 1.5rem;
+    }
 
-            nav {
-                flex-wrap: wrap;
-                gap: 1rem;
-            }
+    nav {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
 
-            .tabs {
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
-            }
+    .tabs {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
 
-            .tab {
-                padding: 0.75rem 1rem;
-                font-size: 0.8rem;
-                white-space: nowrap;
-            }
+    .tab {
+        padding: 0.75rem 1rem;
+        font-size: 0.8rem;
+        white-space: nowrap;
+    }
 
-            .log-item {
-                grid-template-columns: 1fr;
-                gap: 0.5rem;
-            }
+    /* Hide the runs header on mobile */
+    .runs-header {
+        display: none;
+    }
 
-            .log-meta {
-                text-align: left;
-            }
+    .log-item {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
 
-            .run-item {
-                grid-template-columns: 1fr;
-                gap: 0.5rem;
-            }
+    .log-meta {
+        text-align: left;
+    }
 
-            footer {
-                flex-direction: column;
-                gap: 1rem;
-                align-items: flex-start;
-            }
-        }
+    .run-item {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+
+    /* Stack run data vertically on mobile */
+    .run-item .log-meta {
+        text-align: left;
+    }
+
+    footer {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+}
     </style>
 </head>
 <body>
