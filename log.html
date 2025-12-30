@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -225,6 +224,7 @@
         .log-date {
             color: #636362;
             font-size: 0.85rem;
+            font-family: 'Space Mono', monospace;
         }
 
         .log-title {
@@ -251,10 +251,38 @@
         }
 
         /* Runs */
+        .runs-header {
+            display: grid;
+            grid-template-columns: 120px 2fr 80px 100px 1fr;
+            gap: 1.5rem;
+            padding: 0.75rem 0;
+            border-bottom: 2px solid #e0e0e0;
+            margin-bottom: 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #636362;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .runs-header .header-link {
+            text-align: center;
+        }
+
         .run-item {
             display: grid;
-            grid-template-columns: 120px 2fr 1fr 1fr;
+            grid-template-columns: 120px 2fr 80px 100px 1fr;
             gap: 1.5rem;
+        }
+
+        .run-item .log-meta {
+            text-align: center;
+        }
+
+        .run-distance {
+            color: #636362;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
         }
 
         .run-time {
@@ -267,11 +295,11 @@
         .run-link {
             color: #3654B7;
             text-decoration: none;
-            font-size: 0.85rem;
+            font-size: 1.2rem;
         }
 
         .run-link:hover {
-            text-decoration: underline;
+            opacity: 0.7;
         }
 
         /* Mixes */
@@ -440,54 +468,69 @@
 
                 <!-- Runs Tab -->
                 <div id="runs" class="tab-content">
+                    <div class="runs-header">
+                        <span class="header-date">Date</span>
+                        <span class="header-title">Activity</span>
+                        <span class="header-distance">Distance</span>
+                        <span class="header-time">Time</span>
+                        <span class="header-link">Strava</span>
+                    </div>
                     <ul class="log-list">
                         <li class="log-item run-item">
                             <span class="log-date">4 Jun 2025</span>
                             <span class="log-title">Mexico Morning Run</span>
+                            <span class="run-distance">8.14 km</span>
                             <span class="run-time">53:46</span>
-                            <span class="log-meta"><a href="https://www.strava.com/activities/11275179054" target="_blank" class="run-link">View on Strava →</a></span>
+                            <span class="log-meta"><a href="https://www.strava.com/activities/11275179054" target="_blank" class="run-link">→</a></span>
                         </li>
                         <li class="log-item run-item">
                             <span class="log-date">30 May 2025</span>
                             <span class="log-title">Llano Grande to Cuajimoloyas Hike</span>
+                            <span class="run-distance">12.01 km</span>
                             <span class="run-time">4:43:57</span>
-                            <span class="log-meta"><a href="https://www.strava.com/activities/11275179054" target="_blank" class="run-link">View on Strava →</a></span>
+                            <span class="log-meta"><a href="https://www.strava.com/activities/11275179054" target="_blank" class="run-link">→</a></span>
                         </li>
                         <li class="log-item run-item">
                             <span class="log-date">1 Dec 2024</span>
                             <span class="log-title">Valencia Marathon</span>
+                            <span class="run-distance">42.2 km</span>
                             <span class="run-time">3:47:24</span>
-                            <span class="log-meta"><a href="https://www.strava.com/activities/13023663775" target="_blank" class="run-link">View on Strava →</a></span>
+                            <span class="log-meta"><a href="https://www.strava.com/activities/13023663775" target="_blank" class="run-link">→</a></span>
                         </li>
                         <li class="log-item run-item">
                             <span class="log-date">27 Apr 2024</span>
                             <span class="log-title">Gaisberg Summit Hike</span>
+                            <span class="run-distance">6.50 km</span>
                             <span class="run-time">2:23:30</span>
-                            <span class="log-meta"><a href="https://www.strava.com/activities/14694982517" target="_blank" class="run-link">View on Strava →</a></span>
+                            <span class="log-meta"><a href="https://www.strava.com/activities/14694982517" target="_blank" class="run-link">→</a></span>
                         </li>
                         <li class="log-item run-item">
                             <span class="log-date">26 Nov 2023</span>
                             <span class="log-title">Florence Marathon</span>
+                            <span class="run-distance">42.22 km</span>
                             <span class="run-time">3:34:37</span>
-                            <span class="log-meta"><a href="https://www.strava.com/activities/10283748274" target="_blank" class="run-link">View on Strava →</a></span>
+                            <span class="log-meta"><a href="https://www.strava.com/activities/10283748274" target="_blank" class="run-link">→</a></span>
                         </li>
                         <li class="log-item run-item">
                             <span class="log-date">24 Sep 2023</span>
                             <span class="log-title">London Vitality 10K</span>
+                            <span class="run-distance">10.1 km</span>
                             <span class="run-time">45:18</span>
-                            <span class="log-meta"><a href="https://www.strava.com/activities/9909788246" target="_blank" class="run-link">View on Strava →</a></span>
+                            <span class="log-meta"><a href="https://www.strava.com/activities/9909788246" target="_blank" class="run-link">→</a></span>
                         </li>
                         <li class="log-item run-item">
                             <span class="log-date">23 Jul 2023</span>
                             <span class="log-title">San Francisco Half Marathon</span>
+                            <span class="run-distance">20.8 km</span>
                             <span class="run-time">2:02:38</span>
-                            <span class="log-meta"><a href="https://www.strava.com/activities/9507697248" target="_blank" class="run-link">View on Strava →</a></span>
+                            <span class="log-meta"><a href="https://www.strava.com/activities/9507697248" target="_blank" class="run-link">→</a></span>
                         </li>
                         <li class="log-item run-item">
                             <span class="log-date">21 Apr 2023</span>
                             <span class="log-title">London Marathon</span>
+                            <span class="run-distance">42.2 km</span>
                             <span class="run-time">3:53:36</span>
-                            <span class="log-meta"><a href="https://www.strava.com/activities/8663763448" target="_blank" class="run-link">View on Strava →</a></span>
+                            <span class="log-meta"><a href="https://www.strava.com/activities/8663763448" target="_blank" class="run-link">→</a></span>
                         </li>
                     </ul>
                 </div>
@@ -495,11 +538,25 @@
                 <!-- Mixes Tab -->
                 <div id="mixes" class="tab-content">
                     <div class="mix-item">
-                        <div class="mix-title">Club Collective - November 2024</div>
+                        <div class="mix-title">Club Collective - Stamatina b2b Shriya</div>
                         <div class="mix-date">November 2024</div>
                         <a href="https://soundcloud.com/shriya-anand" class="mix-link" target="_blank">Listen on SoundCloud →</a>
                     </div>
-                    <!-- Add more mixes with your SoundCloud links -->
+                    <div class="mix-item">
+                        <div class="mix-title">Pitchfork Afters</div>
+                        <div class="mix-date">November 2024</div>
+                        <a href="https://soundcloud.com/shriya-anand" class="mix-link" target="_blank">Listen on SoundCloud →</a>
+                    </div>
+                    <div class="mix-item">
+                        <div class="mix-title">Basement Jaxx Afters</div>
+                        <div class="mix-date">August 2024</div>
+                        <a href="https://soundcloud.com/shriya-anand" class="mix-link" target="_blank">Listen on SoundCloud →</a>
+                    </div>
+                    <div class="mix-item">
+                        <div class="mix-title">Glasto Afters</div>
+                        <div class="mix-date">June 2024</div>
+                        <a href="https://soundcloud.com/shriya-anand" class="mix-link" target="_blank">Listen on SoundCloud →</a>
+                    </div>
                 </div>
             </div>
         </div>
