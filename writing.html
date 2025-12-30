@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Writing - Shriya's Archive</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📝</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #EBE9E6;
+            color: #000;
+            line-height: 1.6;
+            padding: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        h1 {
+            font-family: 'Space Mono', monospace;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .time {
+            color: #636362;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Navigation */
+        nav {
+            margin-bottom: 3rem;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: #000;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: #3654B7;
+        }
+
+        nav a.active {
+            color: #3654B7;
+        }
+
+        /* Paper container */
+        .paper {
+            background: #F7F7F7;
+            padding: 3rem;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            position: relative;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0,0,0,0.02) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0,0,0,0.02) 0%, transparent 50%);
+        }
+
+        .paper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            border-radius: 4px;
+        }
+
+        /* Writing list */
+        .writing-list {
+            list-style: none;
+        }
+
+        .writing-item {
+            padding: 1.5rem 0;
+            border-bottom: 1px solid #E0E0E0;
+            position: relative;
+        }
+
+        .writing-item:last-child {
+            border-bottom: none;
+        }
+
+        .writing-date {
+            color: #636362;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .writing-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #000;
+            text-decoration: none;
+            display: block;
+            transition: color 0.2s;
+        }
+
+        .writing-title:hover {
+            color: #3654B7;
+        }
+
+        .writing-excerpt {
+            color: #636362;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            font-style: italic;
+        }
+
+        .placeholder-note {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: #636362;
+            font-style: italic;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .paper {
+                padding: 2rem 1.5rem;
+            }
+
+            nav {
+                gap: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Shriya's Archive</h1>
+        <div class="time" id="time"></div>
+        <nav>
+            <a href="index.html">home</a>
+            <a href="writing.html" class="active">writing</a>
+            <a href="log.html">log</a>
+        </nav>
+    </header>
+
+    <div class="paper">
+        <ul class="writing-list">
+            <!-- Placeholder posts - replace with real content -->
+            <li class="writing-item">
+                <div class="writing-date">Coming soon</div>
+                <a href="#" class="writing-title">Placeholder Post Title</a>
+            </li>
+            
+            <li class="writing-item">
+                <div class="writing-date">Coming soon</div>
+                <a href="#" class="writing-title">Another Placeholder Post</a>
+            </li>
+            
+            <li class="writing-item">
+                <div class="writing-date">Coming soon</div>
+                <a href="#" class="writing-title">Third Placeholder Post</a>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        // Update time
+        function updateTime() {
+            const now = new Date();
+            const options = {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            };
+            
+            const timeString = now.toLocaleString('en-US', options);
+            const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            
+            document.getElementById('time').textContent = `${timeString} (${timezone})`;
+        }
+
+        updateTime();
+        setInterval(updateTime, 1000);
+    </script>
+</body>
+</html>
