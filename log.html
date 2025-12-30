@@ -302,6 +302,47 @@
             opacity: 0.7;
         }
 
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e0e0e0;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+        }
+
+        .pagination-button {
+            background: none;
+            border: none;
+            color: #3654B7;
+            cursor: pointer;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            transition: opacity 0.2s;
+        }
+
+        .pagination-button:hover:not(:disabled) {
+            opacity: 0.7;
+        }
+
+        .pagination-button:disabled {
+            color: #d0d0d0;
+            cursor: not-allowed;
+        }
+
+        .pagination-info {
+            color: #636362;
+        }
+
+        .pagination-info .current-page {
+            color: #1a1a1a;
+            font-weight: 600;
+        }
+
         /* Mixes */
         .mix-item {
             padding: 1.5rem 0;
@@ -450,6 +491,13 @@
                         >
                     </div>
                     <ul class="log-list" id="concerts-list"></ul>
+                    <div class="pagination" id="concerts-pagination">
+                        <button class="pagination-button" id="concerts-prev" onclick="changePage('concerts', -1)">← Previous</button>
+                        <span class="pagination-info">
+                            Page <span class="current-page" id="concerts-page">1</span> of <span id="concerts-total">1</span>
+                        </span>
+                        <button class="pagination-button" id="concerts-next" onclick="changePage('concerts', 1)">Next →</button>
+                    </div>
                 </div>
 
                 <!-- Films Tab -->
@@ -464,6 +512,13 @@
                         >
                     </div>
                     <ul class="log-list films-list" id="films-list"></ul>
+                    <div class="pagination" id="films-pagination">
+                        <button class="pagination-button" id="films-prev" onclick="changePage('films', -1)">← Previous</button>
+                        <span class="pagination-info">
+                            Page <span class="current-page" id="films-page">1</span> of <span id="films-total">1</span>
+                        </span>
+                        <button class="pagination-button" id="films-next" onclick="changePage('films', 1)">Next →</button>
+                    </div>
                 </div>
 
                 <!-- Runs Tab -->
@@ -1054,28 +1109,93 @@
             {title: "LA Confidential", year: null}
         ];
 
-        // Populate concerts
-        const concertsList = document.getElementById('concerts-list');
-        concerts.forEach(concert => {
-            const li = document.createElement('li');
-            li.className = 'log-item';
-            li.innerHTML = `
-                <span class="log-date">${concert.date}</span>
-                <span class="log-title">${concert.title}</span>
-                <span class="log-meta">${concert.venue}</span>
-            `;
-            concertsList.appendChild(li);
-        });
+        // Pagination state
+        const ITEMS_PER_PAGE = 30;
+        const paginationState = {
+            concerts: { currentPage: 1, totalPages: Math.ceil(concerts.length / ITEMS_PER_PAGE), filteredData: concerts },
+            films: { currentPage: 1, totalPages: Math.ceil(films.length / ITEMS_PER_PAGE), filteredData: films }
+        };
 
-        // Populate films (in watch order)
-        const filmsList = document.getElementById('films-list');
-        films.forEach(film => {
-            const li = document.createElement('li');
-            li.className = 'log-item';
-            const yearDisplay = film.year ? `<span class="film-year">${film.year}</span>` : '<span class="film-year">—</span>';
-            li.innerHTML = `${yearDisplay}<span class="log-title">${film.title}</span>`;
-            filmsList.appendChild(li);
-        });
+        // Populate concerts with pagination
+        function populateConcerts(page = 1) {
+            const concertsList = document.getElementById('concerts-list');
+            concertsList.innerHTML = '';
+            
+            const state = paginationState.concerts;
+            const start = (page - 1) * ITEMS_PER_PAGE;
+            const end = start + ITEMS_PER_PAGE;
+            const pageData = state.filteredData.slice(start, end);
+            
+            pageData.forEach(concert => {
+                const li = document.createElement('li');
+                li.className = 'log-item';
+                li.innerHTML = `
+                    <span class="log-date">${concert.date}</span>
+                    <span class="log-title">${concert.title}</span>
+                    <span class="log-meta">${concert.venue}</span>
+                `;
+                concertsList.appendChild(li);
+            });
+            
+            updatePaginationControls('concerts');
+        }
+
+        // Populate films with pagination
+        function populateFilms(page = 1) {
+            const filmsList = document.getElementById('films-list');
+            filmsList.innerHTML = '';
+            
+            const state = paginationState.films;
+            const start = (page - 1) * ITEMS_PER_PAGE;
+            const end = start + ITEMS_PER_PAGE;
+            const pageData = state.filteredData.slice(start, end);
+            
+            pageData.forEach(film => {
+                const li = document.createElement('li');
+                li.className = 'log-item';
+                const yearDisplay = film.year ? `<span class="film-year">${film.year}</span>` : '<span class="film-year">—</span>';
+                li.innerHTML = `${yearDisplay}<span class="log-title">${film.title}</span>`;
+                filmsList.appendChild(li);
+            });
+            
+            updatePaginationControls('films');
+        }
+
+        // Update pagination controls
+        function updatePaginationControls(section) {
+            const state = paginationState[section];
+            
+            document.getElementById(`${section}-page`).textContent = state.currentPage;
+            document.getElementById(`${section}-total`).textContent = state.totalPages;
+            
+            const prevBtn = document.getElementById(`${section}-prev`);
+            const nextBtn = document.getElementById(`${section}-next`);
+            
+            prevBtn.disabled = state.currentPage === 1;
+            nextBtn.disabled = state.currentPage === state.totalPages;
+        }
+
+        // Change page
+        function changePage(section, direction) {
+            const state = paginationState[section];
+            const newPage = state.currentPage + direction;
+            
+            if (newPage >= 1 && newPage <= state.totalPages) {
+                state.currentPage = newPage;
+                if (section === 'concerts') {
+                    populateConcerts(newPage);
+                } else if (section === 'films') {
+                    populateFilms(newPage);
+                }
+                
+                // Scroll to top of paper
+                document.querySelector('.paper').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        // Initialize
+        populateConcerts(1);
+        populateFilms(1);
 
         function updateTime() {
             const now = new Date();
@@ -1113,16 +1233,40 @@
         function searchContent(section) {
             const input = document.getElementById(section + '-search');
             const filter = input.value.toLowerCase();
-            const list = document.getElementById(section + '-list');
-            const items = list.getElementsByClassName('log-item');
-
-            for (let i = 0; i < items.length; i++) {
-                const text = items[i].textContent.toLowerCase();
-                if (text.indexOf(filter) > -1) {
-                    items[i].style.display = '';
-                } else {
-                    items[i].style.display = 'none';
+            const state = paginationState[section];
+            
+            if (filter === '') {
+                // No filter, show all data
+                if (section === 'concerts') {
+                    state.filteredData = concerts;
+                } else if (section === 'films') {
+                    state.filteredData = films;
                 }
+            } else {
+                // Apply filter
+                if (section === 'concerts') {
+                    state.filteredData = concerts.filter(item => 
+                        item.date.toLowerCase().includes(filter) ||
+                        item.title.toLowerCase().includes(filter) ||
+                        item.venue.toLowerCase().includes(filter)
+                    );
+                } else if (section === 'films') {
+                    state.filteredData = films.filter(item => 
+                        item.title.toLowerCase().includes(filter) ||
+                        (item.year && item.year.toString().includes(filter))
+                    );
+                }
+            }
+            
+            // Reset to page 1 and recalculate total pages
+            state.currentPage = 1;
+            state.totalPages = Math.ceil(state.filteredData.length / ITEMS_PER_PAGE);
+            
+            // Repopulate
+            if (section === 'concerts') {
+                populateConcerts(1);
+            } else if (section === 'films') {
+                populateFilms(1);
             }
         }
     </script>
