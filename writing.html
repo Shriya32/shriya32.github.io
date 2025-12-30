@@ -24,32 +24,38 @@
         }
 
         /* Header */
-        h1 {
-            font-family: 'Space Mono', monospace;
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            font-weight: 700;
+        .header-container {
+            margin-bottom: 2rem;
         }
 
-        .time {
-            color: #636362;
+        h1 {
             font-family: 'Space Mono', monospace;
-            font-size: 0.85rem;
-            margin-bottom: 2rem;
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+        }
+
+        .time-display {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            color: #636362;
         }
 
         /* Navigation */
         nav {
-            margin-bottom: 3rem;
+            margin: 2rem 0;
             display: flex;
             gap: 2rem;
+            font-size: 0.9rem;
         }
 
         nav a {
             color: #000;
             text-decoration: none;
-            font-size: 1.1rem;
+            position: relative;
             transition: color 0.2s;
+            font-weight: 500;
         }
 
         nav a:hover {
@@ -155,21 +161,22 @@
     </style>
 </head>
 <body>
-    <header>
+    <div class="header-container">
         <h1>Shriya's Archive</h1>
-        <div class="time" id="time"></div>
-        <nav>
-            <a href="index.html">home</a>
-            <a href="writing.html" class="active">writing</a>
-            <a href="log.html">log</a>
-        </nav>
-    </header>
+        <div class="time-display" id="time"></div>
+    </div>
+
+    <nav>
+        <a href="/">home</a>
+        <a href="/writing" class="active">writing</a>
+        <a href="/log">log</a>
+    </nav>
 
     <div class="paper">
         <ul class="writing-list">
             <li class="writing-item">
                 <div class="writing-date">Draft</div>
-                <a href="consulting-to-startups.html" class="writing-title">Consulting → Startups: A Guide to Pivoting</a>
+                <a href="consulting-to-startups" class="writing-title">Consulting → Startups: A Guide to Pivoting</a>
             </li>
             
             <!-- Placeholder posts - replace with real content -->
