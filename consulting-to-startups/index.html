@@ -106,6 +106,8 @@
             font-weight: 700;
             margin-bottom: 0.5rem;
             line-height: 1.2;
+            color: #000;
+            font-family: 'Inter', -apple-system, sans-serif;
         }
 
         .post-meta {
@@ -164,6 +166,31 @@
             color: #636362;
         }
 
+        /* Section dividers */
+        .post-section {
+            position: relative;
+            padding-bottom: 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .post-section:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: -3rem;
+            right: -3rem;
+            height: 1px;
+            background: linear-gradient(
+                90deg,
+                transparent 0%,
+                rgba(0,0,0,0.08) 2%,
+                rgba(0,0,0,0.12) 50%,
+                rgba(0,0,0,0.08) 98%,
+                transparent 100%
+            );
+            box-shadow: 0 1px 1px rgba(255,255,255,0.6);
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             body {
@@ -184,6 +211,11 @@
 
             .post-title {
                 font-size: 1.5rem;
+            }
+
+            .post-section:not(:last-child)::after {
+                left: -1.5rem;
+                right: -1.5rem;
             }
         }
     </style>
@@ -208,79 +240,87 @@
             </div>
 
             <div class="post-content">
-                <p>Over the past few years, my inbox has pinged every so often with a DM from a strategy consultant asking how to pivot into tech / startups. With the future of consulting looking more questionable (hiring freezes, slower promotion cycles, redundancy rumours) that every so often is now pretty much once a week.</p>
+                <div class="post-section">
+                    <p>Over the past few years, my inbox has pinged every so often with a DM from a strategy consultant asking how to pivot into tech / startups. With the future of consulting looking more questionable (hiring freezes, slower promotion cycles, redundancy rumours) that every so often is now pretty much once a week.</p>
 
-                <p>In case that's you (or someone you know), here's what I usually share.</p>
+                    <p>In case that's you (or someone you know), here's what I usually share.</p>
+                </div>
 
-                <h2>Where to find startups</h2>
+                <div class="post-section">
+                    <h2>Where to find startups</h2>
 
-                <p><strong>Network:</strong> One of the best things about consulting is the people you'll get to work with. When looking to move on from Bain, I had conversations with former teammates, managers and loose connections who were doing interesting work, and were generous with their time.</p>
+                    <p><strong>Network:</strong> One of the best things about consulting is the people you'll get to work with. When looking to move on from Bain, I had conversations with former teammates, managers and loose connections who were doing interesting work, and were generous with their time.</p>
 
-                <p><strong>VC Portfolios:</strong> Most VCs maintain job boards with filters for industry, company size and location. Following firms like Sequoia, Index, Redpoint, GV and A16Z is a good way to stay across funding rounds, which usually signals growth and upcoming hiring.</p>
+                    <p><strong>VC Portfolios:</strong> Most VCs maintain job boards with filters for industry, company size and location. Following firms like Sequoia, Index, Redpoint, GV and A16Z is a good way to stay across funding rounds, which usually signals growth and upcoming hiring.</p>
 
-                <p><em>FWIW, I was hired at Stripe by a former Bainee. Four years later I found Attio through a former Stripe colleague. Warm intros are ideal, but cold outreach can work too (as long as you're clear about what you bring).</em></p>
+                    <p><em>FWIW, I was hired at Stripe by a former Bainee. Four years later I found Attio through a former Stripe colleague. Warm intros are ideal, but cold outreach can work too (as long as you're clear about what you bring).</em></p>
 
-                <h2>How to choose a startup</h2>
+                    <h2>How to choose a startup</h2>
 
-                <p>My own criteria were:</p>
-                <ul>
-                    <li>Series A or earlier</li>
-                    <li>Fewer than 50 people</li>
-                    <li>HQ in London - so I could work closely with the founding team.</li>
-                    <li>A market I understood well - I spent four years in Stripe's go-to-market org using legacy GTM software every day. Attio is rebuilding that category from scratch.</li>
-                    <li>People I would be excited to work with every day - completely non-negotiable.</li>
-                </ul>
+                    <p>My own criteria were:</p>
+                    <ul>
+                        <li>Series A or earlier</li>
+                        <li>Fewer than 50 people</li>
+                        <li>HQ in London - so I could work closely with the founding team.</li>
+                        <li>A market I understood well - I spent four years in Stripe's go-to-market org using legacy GTM software every day. Attio is rebuilding that category from scratch.</li>
+                        <li>People I would be excited to work with every day - completely non-negotiable.</li>
+                    </ul>
 
-                <p>I spoke to 20+ companies before joining Attio. Being very deliberate meant it took a lot of time. The topic of candidate market fit is also something people have found helpful to read about when choosing what's next.</p>
+                    <p>I spoke to 20+ companies before joining Attio. Being very deliberate meant it took a lot of time. The topic of candidate market fit is also something people have found helpful to read about when choosing what's next.</p>
+                </div>
 
-                <h2>How to choose a role</h2>
+                <div class="post-section">
+                    <h2>How to choose a role</h2>
 
-                <p>Broad 'Strategy' roles don't really exist in early-stage startups. Everyone is executing and everyone is expected to think strategically.</p>
+                    <p>Broad 'Strategy' roles don't really exist in early-stage startups. Everyone is executing and everyone is expected to think strategically.</p>
 
-                <p>I've found being a generalist in a startup environment highly beneficial, likely because I am in a very cross functional role (Business Operations). Startups are ambiguous and the consulting 'toolkit' of bringing structure to ambiguity is valuable. Working with an extreme amount of grit and high resilience is also valued. Consulting is a great training ground for learning how to work both hard and smart.</p>
+                    <p>I've found being a generalist in a startup environment highly beneficial, likely because I am in a very cross functional role (Business Operations). Startups are ambiguous and the consulting 'toolkit' of bringing structure to ambiguity is valuable. Working with an extreme amount of grit and high resilience is also valued. Consulting is a great training ground for learning how to work both hard and smart.</p>
 
-                <p>Roles that I've seen former consulting colleagues excel in:</p>
+                    <p>Roles that I've seen former consulting colleagues excel in:</p>
 
-                <h3>BizOps or Chief of Staff</h3>
+                    <h3>BizOps or Chief of Staff</h3>
 
-                <p>Both are broad and usually shaped around business needs rather than fixed scopes. At Attio, BizOps has meant owning pricing (pre-PMM), partnerships, people operations, our grad program, and hiring processes - all cross-functional and high-context. To understand the type of work you might do for a BizOps role, it's worth asking what the current gaps are in the company.</p>
+                    <p>Both are broad and usually shaped around business needs rather than fixed scopes. At Attio, BizOps has meant owning pricing (pre-PMM), partnerships, people operations, our grad program, and hiring processes - all cross-functional and high-context. To understand the type of work you might do for a BizOps role, it's worth asking what the current gaps are in the company.</p>
 
-                <p>Chief of Staff can be valuable if scoped well but in some cases it leans heavily toward EA work. One good piece of advice (from Helena Horsburgh): ask who manages the exec team's calendars today. If the answer is 'no one', that's a sign you might do more admin than strategic projects.</p>
+                    <p>Chief of Staff can be valuable if scoped well but in some cases it leans heavily toward EA work. One good piece of advice (from Helena Horsburgh): ask who manages the exec team's calendars today. If the answer is 'no one', that's a sign you might do more admin than strategic projects.</p>
 
-                <p><em>Consulting friends in these types of roles: Arjun at Bumble, Lucy at Adfin, Alice at Flutter</em></p>
+                    <p><em>Consulting friends in these types of roles: Arjun at Bumble, Lucy at Adfin, Alice at Flutter</em></p>
 
-                <h3>Operations</h3>
+                    <h3>Operations</h3>
 
-                <p>Ops at an early-stage company can mean a variety of things, and it's worth noting the difference between 'Ops ops' (legal, payroll, supplier onboarding, compliance) vs Revenue Operations (commercially focused - things like lead scoring, reporting, segmentation, target setting and sales process design).</p>
+                    <p>Ops at an early-stage company can mean a variety of things, and it's worth noting the difference between 'Ops ops' (legal, payroll, supplier onboarding, compliance) vs Revenue Operations (commercially focused - things like lead scoring, reporting, segmentation, target setting and sales process design).</p>
 
-                <p>Operations is company-building work - the plumbing that makes everything else run. It's not always the most visible work, but you learn how businesses are built from the ground up (and a lot about how the world works). It can also set you up for opportunities like COO in the longer term (with a caveat that there are many types of COO profiles out there). If considering a Strategy & Operations role, it's worth understanding exactly what the Operations part means.</p>
+                    <p>Operations is company-building work - the plumbing that makes everything else run. It's not always the most visible work, but you learn how businesses are built from the ground up (and a lot about how the world works). It can also set you up for opportunities like COO in the longer term (with a caveat that there are many types of COO profiles out there). If considering a Strategy & Operations role, it's worth understanding exactly what the Operations part means.</p>
 
-                <p><em>Consulting friends who have followed this path: Oscar at Sourceful, Josh at Runna, Tahseen at Anterior</em></p>
+                    <p><em>Consulting friends who have followed this path: Oscar at Sourceful, Josh at Runna, Tahseen at Anterior</em></p>
 
-                <h3>Go-to-Market (Sales/Customer Success/Business Development)</h3>
+                    <h3>Go-to-Market (Sales/Customer Success/Business Development)</h3>
 
-                <p>Sales and Customer Success roles are consistently in demand. In B2B SaaS, they're often highly strategic (especially in enterprise) and very well-compensated if you perform. You'll be close to the customer and close to revenue. In conversations I've had, these roles are less considered by folks currently in consulting but offer super interesting career paths.</p>
+                    <p>Sales and Customer Success roles are consistently in demand. In B2B SaaS, they're often highly strategic (especially in enterprise) and very well-compensated if you perform. You'll be close to the customer and close to revenue. In conversations I've had, these roles are less considered by folks currently in consulting but offer super interesting career paths.</p>
 
-                <p><em>Consulting friends who have followed this path: Stephane at Enode, Jack at Legora, Saif at Whoop (who is now a founder), Priya at Zen</em></p>
+                    <p><em>Consulting friends who have followed this path: Stephane at Enode, Jack at Legora, Saif at Whoop (who is now a founder), Priya at Zen</em></p>
 
-                <h3>Strategic Finance / Finance & Strategy</h3>
+                    <h3>Strategic Finance / Finance & Strategy</h3>
 
-                <p>Strategic Finance roles in startups are a strong fit for ex-consultants who enjoy analytical problem solving and want to be close to decision making. These roles go beyond traditional FP&A and are focused on financial planning and modelling, resource and capital allocation (including headcount), pricing strategy, scenario planning and supporting major commercial decisions. It can be highly cross-functional and often is set up as being the Business Partner for department leads. This is the role I was lucky to land post Bain (thanks to Conor who hired me at Stripe, who is now leading Finance & Strategy at Anthropic).</p>
+                    <p>Strategic Finance roles in startups are a strong fit for ex-consultants who enjoy analytical problem solving and want to be close to decision making. These roles go beyond traditional FP&A and are focused on financial planning and modelling, resource and capital allocation (including headcount), pricing strategy, scenario planning and supporting major commercial decisions. It can be highly cross-functional and often is set up as being the Business Partner for department leads. This is the role I was lucky to land post Bain (thanks to Conor who hired me at Stripe, who is now leading Finance & Strategy at Anthropic).</p>
 
-                <h3>Product</h3>
+                    <h3>Product</h3>
 
-                <p>Harder to break into directly unless you have a technical background or strong domain context. More common to transition in after building trust in a generalist or BizOps role. One path: join the right company, prove value quickly, and pivot across. (Lola is a great example of this who started her career at Mckinsey and pivoted to Product)</p>
+                    <p>Harder to break into directly unless you have a technical background or strong domain context. More common to transition in after building trust in a generalist or BizOps role. One path: join the right company, prove value quickly, and pivot across. (Lola is a great example of this who started her career at Mckinsey and pivoted to Product)</p>
+                </div>
 
-                <h2>Resources</h2>
+                <div class="post-section">
+                    <h2>Resources</h2>
 
-                <p>A few resources I usually send people:</p>
-                <ul>
-                    <li><a href="https://bizops.careers" target="_blank">BizOps.Careers</a> — strong curation of open roles</li>
-                    <li><a href="https://jumpstart.me" target="_blank">Jumpstart</a> — aimed at early-career candidates</li>
-                    <li><a href="https://nextplay.substack.com" target="_blank">Next Play by Ben Lang</a> — regular newsletter with startup jobs</li>
-                </ul>
+                    <p>A few resources I usually send people:</p>
+                    <ul>
+                        <li><a href="https://bizops.careers" target="_blank">BizOps.Careers</a> — strong curation of open roles</li>
+                        <li><a href="https://jumpstart.me" target="_blank">Jumpstart</a> — aimed at early-career candidates</li>
+                        <li><a href="https://nextplay.substack.com" target="_blank">Next Play by Ben Lang</a> — regular newsletter with startup jobs</li>
+                    </ul>
 
-                <p>The skills built in consulting - structured thinking, communication, resilience, and context switching - are all highly transferable, but the ability and willingness to roll up your sleeves and drive outcomes will set you apart. If you're considering making the leap, I hope this was helpful \o/</p>
+                    <p>The skills built in consulting - structured thinking, communication, resilience, and context switching - are all highly transferable, but the ability and willingness to roll up your sleeves and drive outcomes will set you apart. If you're considering making the leap, I hope this was helpful \o/</p>
+                </div>
             </div>
         </article>
     </div>
