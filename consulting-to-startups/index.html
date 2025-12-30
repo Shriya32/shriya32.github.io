@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulting → Startups: A Guide to Pivoting - Shriya's Archive</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📝</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #EBE9E6;
+            color: #000;
+            line-height: 1.7;
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header-container {
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+        }
+
+        .time-display {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            color: #636362;
+        }
+
+        /* Navigation */
+        nav {
+            margin: 2rem 0 3rem 0;
+            display: flex;
+            gap: 2rem;
+            font-size: 0.9rem;
+        }
+
+        nav a {
+            color: #000;
+            text-decoration: none;
+            position: relative;
+            transition: color 0.2s;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: #3654B7;
+        }
+
+        nav a.active {
+            color: #3654B7;
+        }
+
+        /* Paper container */
+        .paper {
+            background: #F7F7F7;
+            padding: 3rem;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            position: relative;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0,0,0,0.02) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0,0,0,0.02) 0%, transparent 50%);
+        }
+
+        .paper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            border-radius: 4px;
+        }
+
+        /* Article content */
+        article {
+            position: relative;
+        }
+
+        .post-header {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .post-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .post-meta {
+            color: #636362;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+        }
+
+        .post-content {
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .post-content h2 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 2.5rem 0 1rem;
+            color: #1a1a1a;
+        }
+
+        .post-content h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 2rem 0 0.75rem;
+            color: #1a1a1a;
+        }
+
+        .post-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .post-content ul {
+            margin: 1.5rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .post-content li {
+            margin-bottom: 0.75rem;
+        }
+
+        .post-content a {
+            color: #3654B7;
+            text-decoration: none;
+        }
+
+        .post-content a:hover {
+            text-decoration: underline;
+        }
+
+        .post-content strong {
+            font-weight: 600;
+        }
+
+        .post-content em {
+            font-style: italic;
+            color: #636362;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .paper {
+                padding: 2rem 1.5rem;
+            }
+
+            nav {
+                gap: 1.5rem;
+            }
+
+            .post-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-container">
+        <h1>Shriya's Archive</h1>
+        <div class="time-display" id="time"></div>
+    </div>
+
+    <nav>
+        <a href="/">home</a>
+        <a href="/writing" class="active">writing</a>
+        <a href="/log">log</a>
+    </nav>
+
+    <div class="paper">
+        <article>
+            <div class="post-header">
+                <h1 class="post-title">Consulting → Startups: A Guide to Pivoting</h1>
+                <div class="post-meta">Draft</div>
+            </div>
+
+            <div class="post-content">
+                <p>Over the past few years, my inbox has pinged every so often with a DM from a strategy consultant asking how to pivot into tech / startups. With the future of consulting looking more questionable (hiring freezes, slower promotion cycles, redundancy rumours) that every so often is now pretty much once a week.</p>
+
+                <p>In case that's you (or someone you know), here's what I usually share.</p>
+
+                <h2>Where to find startups</h2>
+
+                <p><strong>Network:</strong> One of the best things about consulting is the people you'll get to work with. When looking to move on from Bain, I had conversations with former teammates, managers and loose connections who were doing interesting work, and were generous with their time.</p>
+
+                <p><strong>VC Portfolios:</strong> Most VCs maintain job boards with filters for industry, company size and location. Following firms like Sequoia, Index, Redpoint, GV and A16Z is a good way to stay across funding rounds, which usually signals growth and upcoming hiring.</p>
+
+                <p><em>FWIW, I was hired at Stripe by a former Bainee. Four years later I found Attio through a former Stripe colleague. Warm intros are ideal, but cold outreach can work too (as long as you're clear about what you bring).</em></p>
+
+                <h2>How to choose a startup</h2>
+
+                <p>My own criteria were:</p>
+                <ul>
+                    <li>Series A or earlier</li>
+                    <li>Fewer than 50 people</li>
+                    <li>HQ in London - so I could work closely with the founding team.</li>
+                    <li>A market I understood well - I spent four years in Stripe's go-to-market org using legacy GTM software every day. Attio is rebuilding that category from scratch.</li>
+                    <li>People I would be excited to work with every day - completely non-negotiable.</li>
+                </ul>
+
+                <p>I spoke to 20+ companies before joining Attio. Being very deliberate meant it took a lot of time. The topic of candidate market fit is also something people have found helpful to read about when choosing what's next.</p>
+
+                <h2>How to choose a role</h2>
+
+                <p>Broad 'Strategy' roles don't really exist in early-stage startups. Everyone is executing and everyone is expected to think strategically.</p>
+
+                <p>I've found being a generalist in a startup environment highly beneficial, likely because I am in a very cross functional role (Business Operations). Startups are ambiguous and the consulting 'toolkit' of bringing structure to ambiguity is valuable. Working with an extreme amount of grit and high resilience is also valued. Consulting is a great training ground for learning how to work both hard and smart.</p>
+
+                <p>Roles that I've seen former consulting colleagues excel in:</p>
+
+                <h3>BizOps or Chief of Staff</h3>
+
+                <p>Both are broad and usually shaped around business needs rather than fixed scopes. At Attio, BizOps has meant owning pricing (pre-PMM), partnerships, people operations, our grad program, and hiring processes - all cross-functional and high-context. To understand the type of work you might do for a BizOps role, it's worth asking what the current gaps are in the company.</p>
+
+                <p>Chief of Staff can be valuable if scoped well but in some cases it leans heavily toward EA work. One good piece of advice (from Helena Horsburgh): ask who manages the exec team's calendars today. If the answer is 'no one', that's a sign you might do more admin than strategic projects.</p>
+
+                <p><em>Consulting friends in these types of roles: Arjun at Bumble, Lucy at Adfin, Alice at Flutter</em></p>
+
+                <h3>Operations</h3>
+
+                <p>Ops at an early-stage company can mean a variety of things, and it's worth noting the difference between 'Ops ops' (legal, payroll, supplier onboarding, compliance) vs Revenue Operations (commercially focused - things like lead scoring, reporting, segmentation, target setting and sales process design).</p>
+
+                <p>Operations is company-building work - the plumbing that makes everything else run. It's not always the most visible work, but you learn how businesses are built from the ground up (and a lot about how the world works). It can also set you up for opportunities like COO in the longer term (with a caveat that there are many types of COO profiles out there). If considering a Strategy & Operations role, it's worth understanding exactly what the Operations part means.</p>
+
+                <p><em>Consulting friends who have followed this path: Oscar at Sourceful, Josh at Runna, Tahseen at Anterior</em></p>
+
+                <h3>Go-to-Market (Sales/Customer Success/Business Development)</h3>
+
+                <p>Sales and Customer Success roles are consistently in demand. In B2B SaaS, they're often highly strategic (especially in enterprise) and very well-compensated if you perform. You'll be close to the customer and close to revenue. In conversations I've had, these roles are less considered by folks currently in consulting but offer super interesting career paths.</p>
+
+                <p><em>Consulting friends who have followed this path: Stephane at Enode, Jack at Legora, Saif at Whoop (who is now a founder), Priya at Zen</em></p>
+
+                <h3>Strategic Finance / Finance & Strategy</h3>
+
+                <p>Strategic Finance roles in startups are a strong fit for ex-consultants who enjoy analytical problem solving and want to be close to decision making. These roles go beyond traditional FP&A and are focused on financial planning and modelling, resource and capital allocation (including headcount), pricing strategy, scenario planning and supporting major commercial decisions. It can be highly cross-functional and often is set up as being the Business Partner for department leads. This is the role I was lucky to land post Bain (thanks to Conor who hired me at Stripe, who is now leading Finance & Strategy at Anthropic).</p>
+
+                <h3>Product</h3>
+
+                <p>Harder to break into directly unless you have a technical background or strong domain context. More common to transition in after building trust in a generalist or BizOps role. One path: join the right company, prove value quickly, and pivot across. (Lola is a great example of this who started her career at Mckinsey and pivoted to Product)</p>
+
+                <h2>Resources</h2>
+
+                <p>A few resources I usually send people:</p>
+                <ul>
+                    <li><a href="https://bizops.careers" target="_blank">BizOps.Careers</a> — strong curation of open roles</li>
+                    <li><a href="https://jumpstart.me" target="_blank">Jumpstart</a> — aimed at early-career candidates</li>
+                    <li><a href="https://nextplay.substack.com" target="_blank">Next Play by Ben Lang</a> — regular newsletter with startup jobs</li>
+                </ul>
+
+                <p>The skills built in consulting - structured thinking, communication, resilience, and context switching - are all highly transferable, but the ability and willingness to roll up your sleeves and drive outcomes will set you apart. If you're considering making the leap, I hope this was helpful \o/</p>
+            </div>
+        </article>
+    </div>
+
+    <script>
+        // Update time
+        function updateTime() {
+            const now = new Date();
+            const options = {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            };
+            
+            const timeString = now.toLocaleString('en-US', options);
+            const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            
+            document.getElementById('time').textContent = `${timeString} (${timezone})`;
+        }
+
+        updateTime();
+        setInterval(updateTime, 1000);
+    </script>
+</body>
+</html>
