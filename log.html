@@ -1,1 +1,1074 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log - Shriya's Archive</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💾</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #EBE9E6;
+            color: #000;
+            line-height: 1.6;
+            padding: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header-container {
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+        }
+
+        .time-display {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            color: #636362;
+        }
+
+        nav {
+            margin: 2rem 0;
+            display: flex;
+            gap: 2rem;
+            font-size: 0.9rem;
+        }
+
+        nav a {
+            color: #000;
+            text-decoration: none;
+            position: relative;
+            transition: color 0.2s;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: #3654B7;
+        }
+
+        nav a.active {
+            color: #3654B7;
+        }
+
+        .paper {
+            background: #F7F7F7;
+            padding: 3rem;
+            position: relative;
+            box-shadow: 
+                0 1px 2px rgba(0,0,0,0.07),
+                0 2px 4px rgba(0,0,0,0.07),
+                0 4px 8px rgba(0,0,0,0.07),
+                0 8px 16px rgba(0,0,0,0.07),
+                0 16px 32px rgba(0,0,0,0.07);
+        }
+
+        .paper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(0,0,0,0.02) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0,0,0,0.015) 0%, transparent 50%),
+                radial-gradient(circle at 40% 70%, rgba(0,0,0,0.02) 0%, transparent 50%),
+                radial-gradient(circle at 70% 60%, rgba(0,0,0,0.015) 0%, transparent 50%),
+                radial-gradient(circle at 10% 80%, rgba(0,0,0,0.02) 0%, transparent 50%),
+                radial-gradient(circle at 90% 85%, rgba(0,0,0,0.015) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .paper::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            opacity: 0.5;
+            z-index: 0;
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: -1px;
+        }
+
+        .tab {
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            border: none;
+            background: #e8e8e8;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #636362;
+            border-radius: 4px 4px 0 0;
+            transition: all 0.2s;
+            position: relative;
+            border: 1px solid #d0d0d0;
+            border-bottom: none;
+        }
+
+        .tab:hover {
+            color: #3654B7;
+            background: #efefef;
+        }
+
+        .tab.active {
+            color: #1a1a1a;
+            background: #F7F7F7;
+            border-color: #d0d0d0;
+            z-index: 2;
+        }
+
+        .tab-container {
+            border-top: 1px solid #d0d0d0;
+            padding-top: 2rem;
+        }
+
+        .tab-intro {
+            color: #636362;
+            font-style: italic;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .inline-link {
+            color: #3654B7;
+            text-decoration: none;
+        }
+
+        .inline-link:hover {
+            text-decoration: underline;
+        }
+
+        .strava-embed {
+            margin-bottom: 2rem;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .strava-embed:last-child {
+            margin-bottom: 0;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .search-container {
+            margin-bottom: 2rem;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.75rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 0;
+            background: #fff;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #3654B7;
+        }
+
+        .log-list {
+            list-style: none;
+        }
+
+        .log-item {
+            padding: 1rem 0;
+            border-bottom: 1px solid #f0f0f0;
+            display: grid;
+            grid-template-columns: 120px 1fr 180px;
+            gap: 1.5rem;
+            align-items: baseline;
+            font-size: 0.9rem;
+        }
+
+        .log-item:last-child {
+            border-bottom: none;
+        }
+
+        .log-date {
+            color: #636362;
+            font-size: 0.85rem;
+        }
+
+        .log-title {
+            color: #1a1a1a;
+            font-weight: 500;
+        }
+
+        .log-meta {
+            color: #636362;
+            font-size: 0.85rem;
+            text-align: right;
+        }
+
+        /* Films - display with year like concerts */
+        .films-list .log-item {
+            grid-template-columns: 60px 1fr;
+            padding: 0.75rem 0;
+        }
+        
+        .film-year {
+            color: #636362;
+            font-size: 0.85rem;
+            font-family: 'Space Mono', monospace;
+        }
+
+        /* Runs */
+        .run-item {
+            display: grid;
+            grid-template-columns: 120px 2fr 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .run-time {
+            color: #3654B7;
+            font-weight: 600;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+        }
+
+        .run-link {
+            color: #3654B7;
+            text-decoration: none;
+            font-size: 0.85rem;
+        }
+
+        .run-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Mixes */
+        .mix-item {
+            padding: 1.5rem 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .mix-item:last-child {
+            border-bottom: none;
+        }
+
+        .mix-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #1a1a1a;
+        }
+
+        .mix-date {
+            color: #636362;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        .mix-link {
+            color: #3654B7;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .mix-link:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-links a {
+            color: #000;
+            text-decoration: none;
+            transition: color 0.2s;
+            font-weight: 500;
+        }
+
+        .footer-links a:hover {
+            color: #3654B7;
+        }
+
+        .copyright {
+            color: #636362;
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 1rem;
+            }
+
+            .paper {
+                padding: 2rem 1.5rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .tabs {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .tab {
+                padding: 0.75rem 1rem;
+                font-size: 0.8rem;
+                white-space: nowrap;
+            }
+
+            .log-item {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+
+            .log-meta {
+                text-align: left;
+            }
+
+            .run-item {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-container">
+        <h1>Shriya's Archive</h1>
+        <div class="time-display" id="time"></div>
+    </div>
+
+    <nav>
+        <a href="/">home</a>
+        <a href="/writing">writing</a>
+        <a href="/log" class="active">log</a>
+    </nav>
+
+    <div class="paper">
+        <div class="content">
+            <div class="tabs">
+                <button class="tab active" onclick="switchTab('concerts')">Concerts</button>
+                <button class="tab" onclick="switchTab('films')">Films</button>
+                <button class="tab" onclick="switchTab('runs')">Runs</button>
+                <button class="tab" onclick="switchTab('mixes')">Mixes</button>
+            </div>
+
+            <div class="tab-container">
+                <!-- Concerts Tab -->
+                <div id="concerts" class="tab-content active">
+                    <div class="search-container">
+                        <input 
+                            type="text" 
+                            class="search-input" 
+                            placeholder="Search concerts..." 
+                            onkeyup="searchContent('concerts')"
+                            id="concerts-search"
+                        >
+                    </div>
+                    <ul class="log-list" id="concerts-list"></ul>
+                </div>
+
+                <!-- Films Tab -->
+                <div id="films" class="tab-content">
+                    <div class="search-container">
+                        <input 
+                            type="text" 
+                            class="search-input" 
+                            placeholder="Search films..." 
+                            onkeyup="searchContent('films')"
+                            id="films-search"
+                        >
+                    </div>
+                    <ul class="log-list films-list" id="films-list"></ul>
+                </div>
+
+                <!-- Runs Tab -->
+                <div id="runs" class="tab-content">
+                    <ul class="log-list">
+                        <li class="log-item run-item">
+                            <span class="log-date">4 Jun 2025</span>
+                            <span class="log-title">Mexico Morning Run</span>
+                            <span class="run-time">53:46</span>
+                            <span class="log-meta"><a href="https://www.strava.com/activities/11275179054" target="_blank" class="run-link">View on Strava →</a></span>
+                        </li>
+                        <li class="log-item run-item">
+                            <span class="log-date">30 May 2025</span>
+                            <span class="log-title">Llano Grande to Cuajimoloyas Hike</span>
+                            <span class="run-time">4:43:57</span>
+                            <span class="log-meta"><a href="https://www.strava.com/activities/11275179054" target="_blank" class="run-link">View on Strava →</a></span>
+                        </li>
+                        <li class="log-item run-item">
+                            <span class="log-date">1 Dec 2024</span>
+                            <span class="log-title">Valencia Marathon</span>
+                            <span class="run-time">3:47:24</span>
+                            <span class="log-meta"><a href="https://www.strava.com/activities/13023663775" target="_blank" class="run-link">View on Strava →</a></span>
+                        </li>
+                        <li class="log-item run-item">
+                            <span class="log-date">27 Apr 2024</span>
+                            <span class="log-title">Gaisberg Summit Hike</span>
+                            <span class="run-time">2:23:30</span>
+                            <span class="log-meta"><a href="https://www.strava.com/activities/14694982517" target="_blank" class="run-link">View on Strava →</a></span>
+                        </li>
+                        <li class="log-item run-item">
+                            <span class="log-date">26 Nov 2023</span>
+                            <span class="log-title">Florence Marathon</span>
+                            <span class="run-time">3:34:37</span>
+                            <span class="log-meta"><a href="https://www.strava.com/activities/10283748274" target="_blank" class="run-link">View on Strava →</a></span>
+                        </li>
+                        <li class="log-item run-item">
+                            <span class="log-date">24 Sep 2023</span>
+                            <span class="log-title">London Vitality 10K</span>
+                            <span class="run-time">45:18</span>
+                            <span class="log-meta"><a href="https://www.strava.com/activities/9909788246" target="_blank" class="run-link">View on Strava →</a></span>
+                        </li>
+                        <li class="log-item run-item">
+                            <span class="log-date">23 Jul 2023</span>
+                            <span class="log-title">San Francisco Half Marathon</span>
+                            <span class="run-time">2:02:38</span>
+                            <span class="log-meta"><a href="https://www.strava.com/activities/9507697248" target="_blank" class="run-link">View on Strava →</a></span>
+                        </li>
+                        <li class="log-item run-item">
+                            <span class="log-date">21 Apr 2023</span>
+                            <span class="log-title">London Marathon</span>
+                            <span class="run-time">3:53:36</span>
+                            <span class="log-meta"><a href="https://www.strava.com/activities/8663763448" target="_blank" class="run-link">View on Strava →</a></span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Mixes Tab -->
+                <div id="mixes" class="tab-content">
+                    <div class="mix-item">
+                        <div class="mix-title">Club Collective - November 2024</div>
+                        <div class="mix-date">November 2024</div>
+                        <a href="https://soundcloud.com/shriya-anand" class="mix-link" target="_blank">Listen on SoundCloud →</a>
+                    </div>
+                    <!-- Add more mixes with your SoundCloud links -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-links">
+            <a href="https://www.linkedin.com/in/shriya-anand/">LinkedIn</a>
+            <a href="https://x.com/shriya_anand_">Twitter</a>
+            <a href="mailto:shriya.anand27@gmail.com">Mail</a>
+        </div>
+        <div class="copyright">© 2024 shriya.digital</div>
+    </footer>
+
+    <script>
+        // Concert data
+        const concerts = [
+            {date: "29 Nov 2025", title: "Club Collective - Stamatina b2b Shriya", venue: "The Social, London"},
+            {date: "7 Nov 2025", title: "Oklou, Erika de Casier, Loukeman - Pitchfork", venue: "Roundhouse, London"},
+            {date: "23 Aug 2025", title: "Basement Jaxx", venue: "Crystal Palace Bowl, London"},
+            {date: "26 Jun 2025", title: "Glastonbury", venue: "Worthy Farm, Somerset"},
+            {date: "21 Jun 2025", title: "Dua Lipa", venue: "Wembley Stadium, London"},
+            {date: "16 Apr 2025", title: "Barker, Album Launch", venue: "The Jazz Cafe, London"},
+            {date: "21 Mar 2025", title: "FKA Twigs", venue: "Magazine, London"},
+            {date: "14 Mar 2025", title: "Baynk", venue: "Scala, London"},
+            {date: "23 Feb 2025", title: "Tinashe", venue: "O2 Brixton Academy, London"},
+            {date: "18 Jan 2025", title: "Stamatina x Beat Exchange", venue: "Paper Dress Vintage, London"},
+            {date: "4 Jan 2025", title: "Satin Jackets", venue: "Jazz Cafe, London"},
+            {date: "19 Oct 2024", title: "1-800 Girls", venue: "Studio 9294, London"},
+            {date: "17 Sep 2024", title: "Kucka", venue: "The Social, London"},
+            {date: "10 Aug 2024", title: "Four Tet - All dayer", venue: "Finsbury Park, London"},
+            {date: "13 Jul 2024", title: "BST Presents: Kylie Minogue", venue: "Hyde Park, London"},
+            {date: "29 Jun 2024", title: "Mirror All Night", venue: "Discoteca Anden, Malaga"},
+            {date: "21 Jun 2024", title: "Anish Kumar", venue: "Night Tales, London"},
+            {date: "8 Jun 2024", title: "Copas & Friends", venue: "La Lulu, Madrid"},
+            {date: "7 Jun 2024", title: "Orbita Berlin", venue: "Club Malasana, Madrid"},
+            {date: "18 May 2024", title: "Kiss Me Again", venue: "Soup Kitchen, Manchester"},
+            {date: "10 May 2024", title: "Tourist", venue: "Roundhouse, London"},
+            {date: "9 May 2024", title: "Club Heat: SG Lewis x Tove Lo", venue: "Electrowerks, London"},
+            {date: "9 May 2024", title: "Loukeman", venue: "Peckham Audio, London"},
+            {date: "17 Apr 2024", title: "Love Remains", venue: "fabric, London"},
+            {date: "20 Mar 2024", title: "1-800 Girls x Duskus", venue: "Moth Club, London"},
+            {date: "8 Mar 2024", title: "Concrete Lates x Dialled In: Anu", venue: "Southbank Centre, London"},
+            {date: "22 Feb 2024", title: "ABBA Voyage", venue: "ABBA Arena, London"},
+            {date: "9 Feb 2024", title: "Majid Jordan", venue: "O2 Kentish Town, London"},
+            {date: "29 Oct 2023", title: "Voices Radio x Dancing is a Sport", venue: "Coal Drops Yard, London"},
+            {date: "26 Oct 2023", title: "Overmono", venue: "The Roundhouse, London"},
+            {date: "15 Oct 2023", title: "Madonna: The Celebration Tour", venue: "The O2 London"},
+            {date: "12 Aug 2023", title: "Four Tet x Krankbrother + Dialled In", venue: "Finsbury Park, London"},
+            {date: "24 Jun 2023", title: "Riposte", venue: "Electricworks, London"},
+            {date: "16 Jun 2023", title: "Steel City Dance Discs: Pretty Girl", venue: "Phonox, London"},
+            {date: "23 May 2023", title: "Four Tet x Squidsoup", venue: "Alexandra Palace, London"},
+            {date: "9 May 2023", title: "Jai Paul", venue: "HERE at Outernet, London"},
+            {date: "27 Apr 2023", title: "salute Shield EP Experience", venue: "Corsica Studios, London"},
+            {date: "7 Apr 2023", title: "Kelela", venue: "HERE at Outernet, London"},
+            {date: "29 Mar 2023", title: "Channel Tres", venue: "Koko, London"},
+            {date: "17 Mar 2023", title: "Miks with RONI, K-Lone, Perko", venue: "Venue MOT, London"},
+            {date: "10 Mar 2023", title: "Percolate: Jacques Green x Vegyn", venue: "The Ton of Brix, London"},
+            {date: "1 Mar 2023", title: "Gold Panda", venue: "Lafayette, London"},
+            {date: "4 Feb 2023", title: "Body Movements: Winter Edition", venue: "Printworks, London"},
+            {date: "19 Nov 2022", title: "Aleksandir, Ones", venue: "Space 289, London"},
+            {date: "12 Nov 2022", title: "Jasper Tygner", venue: "Peckham Audio, London"},
+            {date: "22 Oct 2022", title: "Warehouse Project: Peggy Gou, TSHA", venue: "Victoria Warehouse"},
+            {date: "8 Oct 2022", title: "Jacques Greene x DJ Boring", venue: "Koko, London"},
+            {date: "3 Oct 2022", title: "Club Shy x Shygirl", venue: "Metropolis, London"},
+            {date: "24 Sep 2022", title: "Alegria Conga: Tom Noble", venue: "Nublu, NYC"},
+            {date: "13 Aug 2022", title: "Four Tet All-Dayer", venue: "Finsbury Park, London"},
+            {date: "30 Jul 2022", title: "Body Movements: Saoirse, Octa Octa", venue: "Queens Yard Hackney"},
+            {date: "8 Jul 2022", title: "Wireless: Nicki Minaj", venue: "Finsbury Park, London"},
+            {date: "7 Jul 2022", title: "Tinashe", venue: "Electric Brixton, London"},
+            {date: "2 Jul 2022", title: "Joy Orbison - Just For You", venue: "The Social, London"},
+            {date: "23 Jun 2022", title: "Save Brick Lane: Manara", venue: "Brick Lane Arts Club"},
+            {date: "19 Jun 2022", title: "Kaytranada + Friends", venue: "KOKO, London"},
+            {date: "9 Jun 2022", title: "Primavera: Gorillaz, Lorde, MIA", venue: "Barcelona"},
+            {date: "20 May 2022", title: "Charli XCX", venue: "Alexandra Palace, London"},
+            {date: "16 May 2022", title: "Tourist: Album Listening Party", venue: "Highgate Studios"},
+            {date: "6 May 2022", title: "Breakbot x Poolsuite", venue: "The Standard, London"},
+            {date: "3 May 2022", title: "Dua Lipa", venue: "The O2 London"},
+            {date: "28 Apr 2022", title: "Legato", venue: "Club 1001, London"},
+            {date: "28 Apr 2022", title: "Kitsune: Afterwork", venue: "Werkhaus, London"},
+            {date: "16 Apr 2022", title: "Miks with Joe, Supu & Aleksandir", venue: "The Glove That Fits"},
+            {date: "9 Apr 2022", title: "Dialled In: Nabihah Iqbal, Manara", venue: "EARTH Hackney"},
+            {date: "4 Mar 2022", title: "FABRICLIVE: TEED, Jacques Greene", venue: "fabric, London"},
+            {date: "20 Feb 2022", title: "Crossbreed with Kiwi & Fort Romeau", venue: "Colour Factory"},
+            {date: "11 Feb 2022", title: "Mixmag LAB: Paramida", venue: "Mixmag Lab London"},
+            {date: "4 Feb 2022", title: "Standing Babas", venue: "Club Makossa, London"},
+            {date: "20 Jan 2022", title: "Joy Orbison Presents: Overmono", venue: "Below Stone's Nest"},
+            {date: "7 Jan 2022", title: "Session Victim x Baltra", venue: "The Jazz Cafe, London"},
+            {date: "10 Dec 2021", title: "Squish: T4T LUV NRG", venue: "Monument SF"},
+            {date: "9 Dec 2021", title: "DJ Seinfeld: Mirrors Live", venue: "The Independent, SF"},
+            {date: "26 Nov 2021", title: "Percolate presents India Jordan", venue: "Werkhaus, London"},
+            {date: "12 Nov 2021", title: "Yussef Dayas x Giles Peterson", venue: "Alexandra Palace"},
+            {date: "11 Nov 2021", title: "Erika de Casier", venue: "Scala, London"},
+            {date: "6 Nov 2021", title: "Homobloc: Yaegi, Jayda G, Hot Chip", venue: "Victoria Warehouse"},
+            {date: "30 Oct 2021", title: "Hackney Beat Exchange: Stamatina", venue: "Paper Dress Vintage"},
+            {date: "28 Oct 2021", title: "DJ Sienfeld (Mirrors Live)", venue: "EARTH Hackney"},
+            {date: "26 Oct 2021", title: "Tourist", venue: "Village Underground"},
+            {date: "2 Oct 2021", title: "Roche Musique x Cezaire x Kartell", venue: "Metropolis, London"},
+            {date: "1 Oct 2021", title: "Louise Chen x Mixmag", venue: "Mixmag Lab London"},
+            {date: "25 Sep 2021", title: "Birmingham Pride", venue: "Birmingham"},
+            {date: "7 Sep 2021", title: "Skrillex, Four Tet, Jamie XX", venue: "Moth Club, London"},
+            {date: "29 Aug 2021", title: "Metropolis: Field Day After Party", venue: "Metropolis"},
+            {date: "29 Aug 2021", title: "Field Day: Mall Grab, Bonobo, Bicep", venue: "Victoria Park"},
+            {date: "7 Aug 2021", title: "Labyrinth: Maribou State, Fred Again", venue: "Tofte Manor"},
+            {date: "26 Jun 2021", title: "Luxury x Hutton x Ben Lucas", venue: "Orange Yard, London"},
+            {date: "31 Dec 2020", title: "NYE 2020 with Bonobo", venue: "The Midway, SF"},
+            {date: "7 Mar 2020", title: "Purple Disco Machine, TSHA", venue: "1015 Folsom, SF"},
+            {date: "8 Feb 2020", title: "Disco in a Strip Club", venue: "Metropolis, London"},
+            {date: "25 Jan 2020", title: "Anjunadeep", venue: "Audio, SF"},
+            {date: "19 Jan 2020", title: "Leon Vynhall", venue: "1015 Folsom, SF"},
+            {date: "21 Dec 2019", title: "Tourist", venue: "San Francisco"},
+            {date: "8 Dec 2019", title: "Elrow Day Party", venue: "Las Vegas"},
+            {date: "7 Dec 2019", title: "Chainsmokers", venue: "Las Vegas"},
+            {date: "30 Nov 2019", title: "Zimmer", venue: "The Independent, SF"},
+            {date: "26 Oct 2019", title: "Feel My Bicep: Bicep", venue: "1015 Folsom, SF"},
+            {date: "11 Oct 2019", title: "Magdalena x Dixon", venue: "1015 Folsom, SF"},
+            {date: "5 Oct 2019", title: "Drama Duo x SG Lewis", venue: "The Independent, SF"},
+            {date: "23 Aug 2019", title: "Tycho x Burning Man", venue: "Black Rock Desert"},
+            {date: "7 Aug 2019", title: "RA: ravelove LDN, Daniel Avery", venue: "Five Miles, London"},
+            {date: "17 May 2019", title: "Innervisions: Dixon, AME, DJ Koze", venue: "Knockdown Centre, NYC"},
+            {date: "9 May 2019", title: "Four Tet x Squidsoup", venue: "Alexandra Palace"},
+            {date: "22 Mar 2019", title: "Tief X Club Coco", venue: "Corsica Studios"},
+            {date: "24 Feb 2019", title: "Bonobo Album Launch (4hr DJ Set)", venue: "fabric, London"},
+            {date: "21 Dec 2018", title: "Jon Hopkins & DJ Nobu Curate", venue: "fabric, London"},
+            {date: "8 Dec 2018", title: "Ben Pearce", venue: "Miranda: Ace Hotel"},
+            {date: "17 Nov 2018", title: "Decompression: Burning Man", venue: "Vaults, Vauxhall"},
+            {date: "16 Nov 2018", title: "Tourist", venue: "Night Tales, London"},
+            {date: "25 Oct 2018", title: "Outlier: Bonobo (All Night Long)", venue: "fabric, London"},
+            {date: "10 Oct 2018", title: "Four Tet", venue: "O2 Academy Brixton"},
+            {date: "6 Oct 2018", title: "Bondax x Fono", venue: "Hangar, London"},
+            {date: "29 Sep 2018", title: "Haai", venue: "Phonox, London"},
+            {date: "31 Aug 2018", title: "Roche Musique presents Darius", venue: "Camden Assembly"},
+            {date: "1 Aug 2018", title: "Ross From Friends", venue: "Rough Trade, London"},
+            {date: "23 Jun 2018", title: "XOYO Loves: Dimitri + Aeroplane", venue: "XOYO, London"},
+            {date: "31 May 2018", title: "Bonobo", venue: "Alexandra Palace"},
+            {date: "11 May 2018", title: "Jon Hopkins: Album Launch", venue: "Village Underground"},
+            {date: "28 Apr 2018", title: "Glitterbox", venue: "Ministry of Sound"},
+            {date: "23 Feb 2018", title: "Mall Grab: Nonstop Feeling", venue: "Hanger, London"},
+            {date: "5 Feb 2018", title: "Jhene Aiko: TRIP", venue: "O2 Shepherd's Bush"},
+            {date: "18 Nov 2017", title: "XOYO: Julio Bashmore + DJ Boring", venue: "XOYO, London"},
+            {date: "5 Nov 2017", title: "DJ Koze", venue: "Ministry of Sound"},
+            {date: "4 Nov 2017", title: "XOYO: Greg Wilson + Maurice Fulton", venue: "XOYO, London"},
+            {date: "3 Nov 2017", title: "Yuksek", venue: "Camden Assembly"},
+            {date: "7 Oct 2017", title: "Daphni All Night Long", venue: "Corsica Studios"},
+            {date: "23 Sep 2017", title: "XOYO: Breakbot and Red Rack'em", venue: "XOYO, London"},
+            {date: "16 Jul 2017", title: "Citadel After Party - Bonobo", venue: "Village Underground"},
+            {date: "14 Jul 2017", title: "After Dark: Kaytranada", venue: "Village Underground"},
+            {date: "14 Jul 2017", title: "Lovebox: Frank Ocean, Bonobo", venue: "Victoria Park"},
+            {date: "20 May 2017", title: "Louis La Roche, Birdie", venue: "The Magic Roundabout"},
+            {date: "27 Mar 2017", title: "Yuksek + Kraak & Smaak", venue: "Camden Assembly"},
+            {date: "10 Mar 2017", title: "Jarreau Vandall, Evil Needle", venue: "Camden Assembly"},
+            {date: "25 Feb 2017", title: "Bonobo (Live)", venue: "O2 Academy Brixton"},
+            {date: "11 Feb 2017", title: "Kitsune: French Kiss Party", venue: "Village Underground"},
+            {date: "27 Jan 2017", title: "Aeroplane + Friendly Fires DJ Set", venue: "Camden Assembly"},
+            {date: "19 Dec 2016", title: "Warehouse Project: Jungle, Faithless", venue: "Mayfield Station"},
+            {date: "26 Nov 2016", title: "Pleasurehood: Breakbot, Moon Boots", venue: "XOYO, London"},
+            {date: "11 Nov 2016", title: "Lux: Ben UFO, Floating Points", venue: "Lux Libson"},
+            {date: "29 Oct 2016", title: "Percolate: Todd Terje, Maribou State", venue: "Great Suffolk St"},
+            {date: "26 Sep 2016", title: "Bugged Out: Julio Bashmore", venue: "XOYO, London"},
+            {date: "13 Aug 2016", title: "Treasure Island x Dirty Bird", venue: "Treasure Island, SF"},
+            {date: "7 Aug 2016", title: "OutsideLands: Major Lazer, Chance", venue: "Golden Gate Park"},
+            {date: "28 Jul 2016", title: "Karma Kid", venue: "1015 Folsom, SF"},
+            {date: "30 May 2016", title: "Gold Panda", venue: "The Dome, Tufnell Park"},
+            {date: "19 Mar 2016", title: "Shut the Front Door: Darius", venue: "Brixton Jamm"},
+            {date: "10 Jul 2015", title: "Gloria's: Dimitri + Aeroplane", venue: "XOYO, London"},
+            {date: "24 Jun 2015", title: "Bondax and Friends", venue: "XOYO, London"},
+            {date: "12 Jun 2015", title: "Gloria's: Tensnake, Joshua James", venue: "XOYO, London"},
+            {date: "6 Jun 2015", title: "Field Day: LA Priest, Django Django", venue: "Victoria Park"},
+            {date: "5 Jun 2015", title: "Jamie XX: In Colour Tour", venue: "St John's Church"},
+            {date: "3 Jun 2015", title: "White Heat!", venue: "The Lexington"},
+            {date: "22 May 2015", title: "White Heat! w/ Foals", venue: "The Lexington"},
+            {date: "15 May 2015", title: "Aeroplane, Friendly Fires", venue: "The Nest, London"},
+            {date: "17 Apr 2015", title: "Shut The Front Door", venue: "Brixton Jamm"},
+            {date: "6 Feb 2015", title: "White Heat!", venue: "The Lexington"},
+            {date: "16 Jan 2015", title: "Kitsune Showcase: Tobtok", venue: "Miranda - Ace Hotel"},
+            {date: "14 Dec 2014", title: "Nobody's Business: Foals", venue: "BASEMENT: Edition"},
+            {date: "6 Dec 2014", title: "Nobody's Business: Christmas", venue: "BASEMENT: Edition"},
+            {date: "7 Oct 2014", title: "Shut the Front Door: Zimmer", venue: "Brixton Jamm"},
+            {date: "12 Sep 2014", title: "Aeroplane and Jax Jones", venue: "The Nest"},
+            {date: "19 Jul 2014", title: "Lovebox: Bonobo, MIA, Banks", venue: "Victoria Park"},
+            {date: "8 Jul 2014", title: "White Heat w/ Cyril Hahn", venue: "Madame Jo Jo's"},
+            {date: "7 Jun 2014", title: "NOBODY'S BUSINESS x Neneh Cherry", venue: "BASEMENT"},
+            {date: "3 May 2014", title: "Nobody's Business", venue: "BASEMENT: Edition"},
+            {date: "16 Aug 2013", title: "Beacons Festival: Sbtrkt, Bonobo", venue: "Funkirk Estate"},
+            {date: "9 May 2012", title: "Coldplay: Mylo Xyloto", venue: "Etihad Stadium"},
+            {date: "6 Oct 2011", title: "Fenech-Soler", venue: "Manchester Academy"},
+            {date: "21 Feb 2011", title: "Maroon 5", venue: "Manchester Apollo"},
+            {date: "8 Dec 2010", title: "XFM Winter Wonderland", venue: "Manchester Academy"},
+            {date: "10 Sep 2010", title: "Two Door Cinema Club", venue: "Manchester Academy"},
+            {date: "4 Sep 2010", title: "MUSE", venue: "Lancashire Cricket Club"},
+            {date: "7 Jun 2010", title: "The Black Keys", venue: "Manchester Academy"},
+            {date: "3 Jun 2010", title: "The XX", venue: "Manchester Academy"},
+            {date: "9 May 2010", title: "Temper Trap", venue: "Manchester Academy"},
+            {date: "28 Apr 2010", title: "NME Tour: Hurts, Darwin Deez", venue: "Manchester Academy"},
+            {date: "30 Mar 2010", title: "Ellie Goulding", venue: "Manchester Academy"},
+            {date: "5 Mar 2010", title: "Passion Pit", venue: "Manchester Academy"},
+            {date: "22 Feb 2010", title: "JLS", venue: "Manchester Apollo"},
+            {date: "6 Feb 2010", title: "NME Tour: THE MACCABEES", venue: "Manchester Academy"},
+            {date: "24 Oct 2009", title: "Calvin Harris with Ellie Goulding", venue: "Manchester Academy"},
+            {date: "12 Sep 2009", title: "Coldplay: Viva La Vida", venue: "Lancashire Cricket Club"},
+            {date: "8 Jul 2009", title: "Madonna: Sticky and Sweet Tour", venue: "MEN Arena"},
+            {date: "3 Jul 2009", title: "Silversun Pickups", venue: "Manchester Academy"},
+            {date: "29 May 2009", title: "Beyonce: I am", venue: "MEN Arena"},
+            {date: "27 Apr 2009", title: "Friendly Fires", venue: "Manchester Academy"},
+            {date: "7 Feb 2009", title: "NME Tour: Glasvegas, Florence", venue: "Manchester Academy"},
+            {date: "12 Dec 2008", title: "Coldplay: Viva La Vida", venue: "MEN Arena"},
+            {date: "14 May 2007", title: "Justin Timberlake", venue: "MEN Arena"}
+        ];
+
+        // Films in watch order (most recent first) with release years
+        const films = [
+            {title: "Pillion", year: 2025},
+            {title: "Marty Supreme", year: 2025},
+            {title: "Jay Kelly", year: 2025},
+            {title: "Wicked", year: 2024},
+            {title: "Train dreams", year: 2025},
+            {title: "Islands", year: 2025},
+            {title: "One battle after another", year: 2025},
+            {title: "Sinners", year: 2025},
+            {title: "A Real Pain", year: 2024},
+            {title: "Blue Velvet", year: 1986},
+            {title: "The Brutalist", year: 2024},
+            {title: "There will be blood", year: 2007},
+            {title: "Anora", year: 2024},
+            {title: "Kneecap", year: 2024},
+            {title: "Gladiator II", year: 2024},
+            {title: "On becoming a guinea fowl", year: 2024},
+            {title: "Conclave", year: 2024},
+            {title: "Layla", year: 2024},
+            {title: "Bird", year: 2024},
+            {title: "The Room Next Door", year: 2024},
+            {title: "The Substance", year: 2024},
+            {title: "Inside out 2", year: 2024},
+            {title: "Blackberry", year: 2023},
+            {title: "Saving Private Ryan", year: 1998},
+            {title: "The Zone of Interest", year: 2023},
+            {title: "Mother's Instinct", year: 2024},
+            {title: "Kinds of Kindness", year: 2024},
+            {title: "Enough Said", year: 2013},
+            {title: "Air", year: 2023},
+            {title: "The Hunt", year: 2012},
+            {title: "Hoard", year: 2024},
+            {title: "The Idea of You", year: 2024},
+            {title: "Perfect Days", year: 2023},
+            {title: "Sing", year: 2016},
+            {title: "Challengers", year: 2024},
+            {title: "Monkey Man", year: 2024},
+            {title: "Robot Dreams", year: 2024},
+            {title: "American Fiction", year: 2024},
+            {title: "Wonka", year: 2023},
+            {title: "Dune 2", year: 2024},
+            {title: "Julie and Julia", year: 2009},
+            {title: "The Iron Claw", year: 2023},
+            {title: "Margin Call", year: null},
+            {title: "Dumb Money", year: null},
+            {title: "Poor Things", year: null},
+            {title: "Four Daughters", year: null},
+            {title: "Society of Snow", year: null},
+            {title: "How to have sex", year: null},
+            {title: "May December", year: null},
+            {title: "Saltburn", year: null},
+            {title: "Napoleon", year: null},
+            {title: "All of Us are Strangers", year: null},
+            {title: "Fallen Leaves", year: null},
+            {title: "Priscilla", year: null},
+            {title: "Maestro", year: null},
+            {title: "Oppenheimer", year: null},
+            {title: "Barbie", year: null},
+            {title: "The Holdovers", year: null},
+            {title: "Anatomy of a fall", year: null},
+            {title: "Past Lives", year: null},
+            {title: "Killings of the flower moon", year: null},
+            {title: "House of Gucci", year: null},
+            {title: "Glass Onion", year: null},
+            {title: "She Said", year: null},
+            {title: "Decision to leave", year: null},
+            {title: "Tenet", year: null},
+            {title: "The Good Nurse", year: null},
+            {title: "Passages", year: null},
+            {title: "Tar", year: null},
+            {title: "Coda", year: null},
+            {title: "The Whale", year: null},
+            {title: "Aftersun", year: null},
+            {title: "The Menu", year: null},
+            {title: "Triangle of Sadness", year: null},
+            {title: "Belfast", year: null},
+            {title: "Paterson", year: null},
+            {title: "Polite Society", year: null},
+            {title: "Banshee of Insherin", year: null},
+            {title: "Broker", year: null},
+            {title: "Don't Worry Darling", year: null},
+            {title: "Official Competition", year: null},
+            {title: "Volver", year: null},
+            {title: "Ali & Ava", year: null},
+            {title: "The Gift", year: null},
+            {title: "Memoria", year: null},
+            {title: "Flee", year: null},
+            {title: "Off The Record: Laurent Garnier", year: null},
+            {title: "Dear Bradford", year: null},
+            {title: "My Mother's Girlfriend", year: null},
+            {title: "Muhafiz", year: null},
+            {title: "Trinity", year: null},
+            {title: "Queer Parivaar", year: null},
+            {title: "Begum Paravathi", year: null},
+            {title: "Everything Everywhere All at Once", year: null},
+            {title: "The Worst Person in The World", year: null},
+            {title: "Petite Maman", year: null},
+            {title: "Parallel Mothers", year: null},
+            {title: "Boiling Point", year: null},
+            {title: "Licorice Pizza", year: null},
+            {title: "Spencer", year: null},
+            {title: "The Lost Daughter", year: null},
+            {title: "Shiva Baby", year: null},
+            {title: "Nomadland", year: null},
+            {title: "Minari", year: null},
+            {title: "Dark Waters", year: null},
+            {title: "Borat 2", year: null},
+            {title: "Your Name", year: null},
+            {title: "Howl's Moving Castle", year: null},
+            {title: "Never Rarely Sometimes Always", year: null},
+            {title: "Burning", year: null},
+            {title: "Old Boy", year: null},
+            {title: "The Handmaiden", year: null},
+            {title: "The farewell", year: null},
+            {title: "Book smart", year: null},
+            {title: "Marriage story", year: null},
+            {title: "Parasite", year: null},
+            {title: "Once upon a time in Hollywood", year: null},
+            {title: "You've got mail", year: null},
+            {title: "Bridges of Madison Country", year: null},
+            {title: "Moneyball", year: null},
+            {title: "A portrait of a lady on fire", year: null},
+            {title: "The Talented Mr Riply", year: null},
+            {title: "Can you ever forgive me", year: null},
+            {title: "A simple favour", year: null},
+            {title: "Disobedience", year: null},
+            {title: "The Invisible Man", year: null},
+            {title: "Midsommar", year: null},
+            {title: "Maggie's plan", year: null},
+            {title: "A star is born", year: null},
+            {title: "The Favourite", year: null},
+            {title: "Roma", year: null},
+            {title: "Good time", year: null},
+            {title: "Apollo 13", year: null},
+            {title: "Being John Malkovich", year: null},
+            {title: "Cabin In The Woods", year: null},
+            {title: "Blackkklansman", year: null},
+            {title: "Sorry to bother you", year: null},
+            {title: "Girl interrupted", year: null},
+            {title: "Mind the gap", year: null},
+            {title: "If Beale street could talk", year: null},
+            {title: "Free solo", year: null},
+            {title: "Coco", year: null},
+            {title: "Rain man", year: null},
+            {title: "Okja", year: null},
+            {title: "Isle of Dogs", year: null},
+            {title: "Shape Of Water", year: null},
+            {title: "Lady Bird", year: null},
+            {title: "What we do in the shadows", year: null},
+            {title: "Black Panther", year: null},
+            {title: "Florida Project", year: null},
+            {title: "Hereditary", year: null},
+            {title: "Silence Of The Lambs", year: null},
+            {title: "Three Billboards Outside Ebbing Missouri", year: null},
+            {title: "Selma", year: null},
+            {title: "The Breakfast Club", year: null},
+            {title: "Lost in Translation", year: null},
+            {title: "Call Me By Your Name", year: null},
+            {title: "Groundhog Day", year: null},
+            {title: "About Schmidt", year: null},
+            {title: "As Good As It Gets", year: null},
+            {title: "Ex Machina", year: null},
+            {title: "Under the Skin", year: null},
+            {title: "I, Daniel Blake", year: null},
+            {title: "Us", year: null},
+            {title: "Moonlight", year: null},
+            {title: "La La Land", year: null},
+            {title: "Jackie", year: null},
+            {title: "Doubt", year: null},
+            {title: "Get Out", year: null},
+            {title: "Frances Ha", year: null},
+            {title: "Manhattan", year: null},
+            {title: "Annie Hall", year: null},
+            {title: "Trainspotting", year: null},
+            {title: "The Big Short", year: null},
+            {title: "Before Sunset", year: null},
+            {title: "Before Midnight", year: null},
+            {title: "Before Sunrise", year: null},
+            {title: "The Babbadook", year: null},
+            {title: "The Usual Suspects", year: null},
+            {title: "Truman Show", year: null},
+            {title: "Spotlight", year: null},
+            {title: "The Lobster", year: null},
+            {title: "Carol", year: null},
+            {title: "Amelie", year: null},
+            {title: "The Lives of Others", year: null},
+            {title: "Up In the Air", year: null},
+            {title: "Interstellar", year: null},
+            {title: "Annihilation", year: null},
+            {title: "Ferris Bueller's Day off", year: null},
+            {title: "One Flew Over The Cuckoo's Nest", year: null},
+            {title: "Legally Blonde", year: null},
+            {title: "Amy", year: null},
+            {title: "Avatar", year: null},
+            {title: "Foxcatcher", year: null},
+            {title: "Mad Max Fury Road", year: null},
+            {title: "Les Miserables", year: null},
+            {title: "Dead Poet's Society", year: null},
+            {title: "Cloverfield", year: null},
+            {title: "Insomnia", year: null},
+            {title: "Beautiful Mind", year: null},
+            {title: "Goodwill Hunting", year: null},
+            {title: "The Social Network", year: null},
+            {title: "Limitless", year: null},
+            {title: "The Lunchbox", year: null},
+            {title: "Dallas Buyers Club", year: null},
+            {title: "Brokeback Mountain", year: null},
+            {title: "Four Weddings and Funeral", year: null},
+            {title: "Theory of Everything", year: null},
+            {title: "Edward Scissorhands", year: null},
+            {title: "Birdman", year: null},
+            {title: "The Orphanage", year: null},
+            {title: "Vicky Christina Barcelona", year: null},
+            {title: "Midnight in Paris", year: null},
+            {title: "Stardust", year: null},
+            {title: "Gone Baby Gone", year: null},
+            {title: "Whiplash", year: null},
+            {title: "Her", year: null},
+            {title: "Blue Jasmine", year: null},
+            {title: "Contagion", year: null},
+            {title: "Side Effects", year: null},
+            {title: "The Reader", year: null},
+            {title: "The Changeling", year: null},
+            {title: "The Grand Budapest Hotel", year: null},
+            {title: "Moonrise Kingdom", year: null},
+            {title: "Notting Hill", year: null},
+            {title: "Valentine's Day", year: null},
+            {title: "Jerry Maguire", year: null},
+            {title: "He's Just Not That Into You", year: null},
+            {title: "10 Things I Hate About You", year: null},
+            {title: "Pretty Woman", year: null},
+            {title: "When Harry Met Sally", year: null},
+            {title: "In Bruges", year: null},
+            {title: "Imitation Game", year: null},
+            {title: "Philomena", year: null},
+            {title: "Million Dollar Baby", year: null},
+            {title: "An Education", year: null},
+            {title: "Erin Brockovich", year: null},
+            {title: "Philadelphia", year: null},
+            {title: "Gran Torino", year: null},
+            {title: "Silver Linings Playbook", year: null},
+            {title: "The Descendants", year: null},
+            {title: "Devdas", year: null},
+            {title: "Gravity", year: null},
+            {title: "Drive", year: null},
+            {title: "Never Let Me Go", year: null},
+            {title: "Millions", year: null},
+            {title: "21 Grams", year: null},
+            {title: "The King's Speech", year: null},
+            {title: "Inception", year: null},
+            {title: "The Ring", year: null},
+            {title: "Rosemary's Baby", year: null},
+            {title: "True Grit", year: null},
+            {title: "Mystic River", year: null},
+            {title: "Tree of Life", year: null},
+            {title: "Primal Fear", year: null},
+            {title: "Slumdog Millionaire", year: null},
+            {title: "Fight Club", year: null},
+            {title: "Curious Case of Benjamin Button", year: null},
+            {title: "No Country for Old Men", year: null},
+            {title: "Zodiac", year: null},
+            {title: "Burn After Reading", year: null},
+            {title: "Babel", year: null},
+            {title: "Blood Diamond", year: null},
+            {title: "Catch Me If you Can", year: null},
+            {title: "City of God", year: null},
+            {title: "Crash", year: null},
+            {title: "Traffic", year: null},
+            {title: "Spirited away", year: null},
+            {title: "The Prestige", year: null},
+            {title: "The Fighter", year: null},
+            {title: "The Machinist", year: null},
+            {title: "The Illusionist", year: null},
+            {title: "The Pianist", year: null},
+            {title: "Gone Girl", year: null},
+            {title: "Argo", year: null},
+            {title: "The Town", year: null},
+            {title: "The Ides of March", year: null},
+            {title: "American Hustle", year: null},
+            {title: "American Beauty", year: null},
+            {title: "Milk", year: null},
+            {title: "Sixth Sense", year: null},
+            {title: "Momento", year: null},
+            {title: "The Departed", year: null},
+            {title: "LA Confidential", year: null}
+        ];
+
+        // Populate concerts
+        const concertsList = document.getElementById('concerts-list');
+        concerts.forEach(concert => {
+            const li = document.createElement('li');
+            li.className = 'log-item';
+            li.innerHTML = `
+                <span class="log-date">${concert.date}</span>
+                <span class="log-title">${concert.title}</span>
+                <span class="log-meta">${concert.venue}</span>
+            `;
+            concertsList.appendChild(li);
+        });
+
+        // Populate films (in watch order)
+        const filmsList = document.getElementById('films-list');
+        films.forEach(film => {
+            const li = document.createElement('li');
+            li.className = 'log-item';
+            const yearDisplay = film.year ? `<span class="film-year">${film.year}</span>` : '<span class="film-year">—</span>';
+            li.innerHTML = `${yearDisplay}<span class="log-title">${film.title}</span>`;
+            filmsList.appendChild(li);
+        });
+
+        function updateTime() {
+            const now = new Date();
+            const options = {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            };
+            
+            const timeString = now.toLocaleString('en-US', options);
+            const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            
+            document.getElementById('time').textContent = `${timeString} (${timezone})`;
+        }
+
+        updateTime();
+        setInterval(updateTime, 1000);
+
+        function switchTab(tabName) {
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+            
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function searchContent(section) {
+            const input = document.getElementById(section + '-search');
+            const filter = input.value.toLowerCase();
+            const list = document.getElementById(section + '-list');
+            const items = list.getElementsByClassName('log-item');
+
+            for (let i = 0; i < items.length; i++) {
+                const text = items[i].textContent.toLowerCase();
+                if (text.indexOf(filter) > -1) {
+                    items[i].style.display = '';
+                } else {
+                    items[i].style.display = 'none';
+                }
+            }
+        }
+    </script>
+    <script src="https://strava-embeds.com/embed.js"></script>
+</body>
+</html>
